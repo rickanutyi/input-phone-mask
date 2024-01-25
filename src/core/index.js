@@ -61,25 +61,13 @@ export const InputPhoneMask = ({ input, onChange, mask, replaceChar }) => {
   const Input = document.getElementById(input);
   const maskWithReplaceChar = mask.replace(/0/g, replaceChar);
   Input.value = maskWithReplaceChar;
-
+  let betweenCharCount = 0;
   Input.addEventListener("input", function (event) {
     const inputValue = event.currentTarget.value;
     //при нажатии на кнопку удаления
     if (event.inputType === "deleteContentBackward") {
       let stop = false;
-      //с прошлого черновика притащил . в душе не ебу что тут происходит . только примерно понимаю
-      let numbersCount = inputValue.split("").reduce((acc, prev) => {
-        if (prev === replaceChar) stop = true;
-        if (stop) return acc;
-        return acc + 1;
-      }, 0);
-      if (
-        //с прошлого черновика притащил . в душе не ебу что тут происходит . только примерно понимаю
-        !isNumber(inputValue[numbersCount - 1]) &&
-        inputValue[numbersCount - 1] !== replaceChar
-      ) {
-        numbersCount = numbersCount - 1;
-      }
+      const selectionPosition = Input.selectionStart;
       const maskedValue = maskOnDelete(
         inputValue,
         maskWithReplaceChar,
@@ -88,9 +76,23 @@ export const InputPhoneMask = ({ input, onChange, mask, replaceChar }) => {
       Input.value = maskedValue;
       //вот это нужно чтобы контролировать расположение палочки в инпуте(забыл как называется)
       // И это обязательно нужно делать после того как значение инпута поменяется
-      Input.setSelectionRange(numbersCount, numbersCount);
+
+      let replaceCharCount = maskedValue
+        .split("")
+        .filter((e) => e === replaceChar).length;
+      if (
+        maskedValue[selectionPosition - 1] !== replaceChar &&
+        !isNumber(maskedValue[selectionPosition - 1])
+      )
+        betweenCharCount = betweenCharCount + 1;
+      Input.setSelectionRange(
+        Input.selectionStart - (replaceCharCount + betweenCharCount),
+        Input.selectionStart - (replaceCharCount + betweenCharCount)
+      );
+
       return;
     }
+    if (betweenCharCount !== 0) betweenCharCount = 0;
     const maskedValue = maskNewValue(
       maskWithReplaceChar,
       inputValue,
