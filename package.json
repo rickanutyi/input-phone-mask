@@ -4,8 +4,15 @@
   "description": "chipi chipi chapa chapa",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "webpack"
   },
   "author": "Erlan, Ilim",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.23.7",
+    "@babel/preset-env": "^7.23.8",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.4"
+  }
 }
