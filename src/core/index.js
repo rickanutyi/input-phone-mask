@@ -27,8 +27,8 @@ export const maskNewValue = (mask, newValue, replaceChar) => {
 
 /**
  *
- * @param {string} value
- * @param {string} prevValue
+ * @param {string} value - значение инпута
+ * @param {string} mask - Маска, только где изменяемы значения были заменены на replaceChar
  * @returns {string}
  */
 export const maskOnDelete = (value, mask, replaceChar) => {
@@ -38,6 +38,7 @@ export const maskOnDelete = (value, mask, replaceChar) => {
   const newValue = maskArray.reduce((acc, prev) => {
     if (prev === replaceChar) {
       index = index + 1;
+      //тут мы смотрим если что то стерлось unmaskedValue[index - 1] будет undefined, в таком случае акрнем acc + replaceChar
       return unmaskedValue[index - 1]
         ? acc + unmaskedValue[index - 1]
         : acc + replaceChar;
@@ -63,25 +64,30 @@ export const InputPhoneMask = ({ input, onChange, mask, replaceChar }) => {
 
   Input.addEventListener("input", function (event) {
     const inputValue = event.currentTarget.value;
+    //при нажатии на кнопку удаления
     if (event.inputType === "deleteContentBackward") {
       let stop = false;
+      //с прошлого черновика притащил . в душе не ебу что тут происходит . только примерно понимаю
       let numbersCount = inputValue.split("").reduce((acc, prev) => {
         if (prev === replaceChar) stop = true;
         if (stop) return acc;
         return acc + 1;
       }, 0);
       if (
+        //с прошлого черновика притащил . в душе не ебу что тут происходит . только примерно понимаю
         !isNumber(inputValue[numbersCount - 1]) &&
         inputValue[numbersCount - 1] !== replaceChar
-      )
+      ) {
         numbersCount = numbersCount - 1;
+      }
       const maskedValue = maskOnDelete(
         inputValue,
         maskWithReplaceChar,
         replaceChar
       );
-      console.log(maskedValue, "masked");
       Input.value = maskedValue;
+      //вот это нужно чтобы контролировать расположение палочки в инпуте(забыл как называется)
+      // И это обязательно нужно делать после того как значение инпута поменяется
       Input.setSelectionRange(numbersCount, numbersCount);
       return;
     }
