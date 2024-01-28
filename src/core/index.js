@@ -1,4 +1,4 @@
-import { isMutable, isNumber, isUndefined } from "utils/index";
+import { isNumber } from "utils/index";
 
 /**
  *
@@ -34,7 +34,6 @@ export const maskNewValue = (mask, newValue, replaceChar) => {
 export const maskOnDelete = (value, mask, replaceChar) => {
   const maskArray = mask.split("");
   const unmaskedValue = value.replace(/\D/g, "").replace(/^(996)/, "");
-  console.log(unmaskedValue);
   let index = 0;
   const newValue = maskArray.reduce((acc, prev) => {
     if (prev === replaceChar) {
@@ -57,48 +56,24 @@ export const maskOnDelete = (value, mask, replaceChar) => {
  *  mask: string
  *  replaceChar: string
  * }} props
+ * @example
+ * window.InputPhoneMask({
+    input: "input",
+    mask: "0000 0000 0000 0000",
+    onChange: (value) => console.log(value),
+    replaceChar: "-",
+  });
  */
 export const InputPhoneMask = ({ input, onChange, mask, replaceChar }) => {
   const Input = document.getElementById(input);
   const maskWithReplaceChar = mask.replace(/0/g, replaceChar);
   Input.value = maskWithReplaceChar;
-  let betweenCharCount = 0;
   Input.addEventListener("input", function (event) {
     const inputValue = event.currentTarget.value;
     //при нажатии на кнопку удаления
     if (event.inputType === "deleteContentBackward") {
-      //   let stop = false;
-      //   const selectionPosition = Input.selectionStart;
-      //   const maskedValue = maskOnDelete(
-      //     inputValue,
-      //     maskWithReplaceChar,
-      //     replaceChar
-      //   );
-      //   Input.value = maskedValue;
-      //вот это нужно чтобы контролировать расположение палочки в инпуте(забыл как называется)
-      // И это обязательно нужно делать после того как значение инпута поменяется
-
-      //   let replaceCharCount = maskedValue
-      //     .split("")
-      //     .filter((e) => e === replaceChar).length;
-      //   if (
-      //     maskedValue[selectionPosition - 1] !== replaceChar &&
-      //     !isNumber(maskedValue[selectionPosition - 1])
-      //   ) {
-      //     betweenCharCount = betweenCharCount + 1;
-      //   } else if (
-      //     maskedValue[selectionPosition] !== replaceChar &&
-      //     !isNumber(maskedValue[selectionPosition])
-      //   )
-      //     betweenCharCount = betweenCharCount + 1;
-      //   Input.setSelectionRange(
-      //     Input.selectionStart - (replaceCharCount + betweenCharCount),
-      //     Input.selectionStart - (replaceCharCount + betweenCharCount)
-      //   );
-
       return;
     }
-    // if (betweenCharCount !== 0) betweenCharCount = 0;
     const maskedValue = maskNewValue(
       maskWithReplaceChar,
       inputValue,

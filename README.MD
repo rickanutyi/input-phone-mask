@@ -1,14 +1,11 @@
-type Mask = string
-type MutableMaskPart = 0
-type MutableReplaceChar = string / Это нужно чтобы вместо 0 подставлять знак
-например в Mask = "996000" и MutableReplaceChar = "\_"  мы будем показывать "996\_\_\_"
-
-
-Илим! как протестировать? 
-Ответ - В корне проекта запускаешь npm i && npm run build. Появится папка dist и там будет файл bundle.js. Создаешь любой html файл и 
-подключаешь bundle.js/ в html файле дплжен быть инпут с айди input
-вот и все
-
-Пока так, потом наверное сделаем глобаный метод (window.method)
-
-Ах да, пока не для фреймворков, для них отдельные обертки будут
+window.InputPhoneMask({
+    input: "input",
+    mask: "0000 0000 0000 0000",
+    onChange: (value) => console.log(value),
+    replaceChar: "-",
+});
+input = id of input
+mask = any string value, char "0" will be editable part, any other char will be part of mask
+onChange = Function(value: string / MaskedValue)
+replaceChar = The value that will shown instead of "0"
+example mask = 00-00, replaceChar = "_", input shows "__-__"
