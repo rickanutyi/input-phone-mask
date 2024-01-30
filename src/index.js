@@ -1,3 +1,5 @@
 import { InputPhoneMask } from "core/index";
 
-window.InputPhoneMask = InputPhoneMask
+window.InputPhoneMask = InputPhoneMask;
+
+export { SimpleInputMask }

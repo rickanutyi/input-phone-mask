@@ -1,4 +1,4 @@
-import { isNumber } from "utils/index";
+import { isNumber } from "../utils";
 
 /**
  *
@@ -48,6 +48,21 @@ export const maskOnDelete = (value, mask, replaceChar) => {
   return `${newValue}`;
 };
 
+export const replaceEditablePart = (mask, replaceChar) => {
+  return mask.replace(/0/g, replaceChar);
+};
+
+export const inputChangeIndicator = (maskedValue, Input, replaceChar) => {
+  let stop = false;
+  const numbersCount = maskedValue.split("").reduce((acc, prev) => {
+    if (prev === replaceChar) stop = true;
+    if (stop) return acc;
+    return acc + 1;
+  }, 0);
+
+  Input.setSelectionRange(numbersCount, numbersCount);
+};
+
 /**
  *
  * @param {{
@@ -66,7 +81,7 @@ export const maskOnDelete = (value, mask, replaceChar) => {
  */
 export const InputPhoneMask = ({ input, onChange, mask, replaceChar }) => {
   const Input = document.getElementById(input);
-  const maskWithReplaceChar = mask.replace(/0/g, replaceChar);
+  const maskWithReplaceChar = replaceEditablePart(mask, replaceChar);
   Input.value = maskWithReplaceChar;
   Input.addEventListener("input", function (event) {
     const inputValue = event.currentTarget.value;
@@ -81,13 +96,6 @@ export const InputPhoneMask = ({ input, onChange, mask, replaceChar }) => {
     );
     onChange(maskedValue);
     Input.value = maskedValue;
-    let stop = false;
-    const numbersCount = maskedValue.split("").reduce((acc, prev) => {
-      if (prev === replaceChar) stop = true;
-      if (stop) return acc;
-      return acc + 1;
-    }, 0);
-
-    Input.setSelectionRange(numbersCount, numbersCount);
+    inputChangeIndicator(maskedValue, Input);
   });
 };

@@ -1,3 +1,5 @@
+#Input simple mask
+
 window.InputPhoneMask({
     input: "input",
     mask: "0000 0000 0000 0000",
