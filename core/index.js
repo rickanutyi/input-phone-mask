@@ -30,8 +30,9 @@ export const maskNewValue = (mask, newValue, replaceChar) => {
  * @param {string} value - значение инпута
  * @param {string} mask - Маска, только где изменяемы значения были заменены на replaceChar
  * @returns {string}
+ * @deprecated
  */
-export const maskOnDelete = (value, mask, replaceChar) => {
+const maskOnDelete = (value, mask, replaceChar) => {
   const maskArray = mask.split("");
   const unmaskedValue = value.replace(/\D/g, "").replace(/^(996)/, "");
   let index = 0;
@@ -49,7 +50,9 @@ export const maskOnDelete = (value, mask, replaceChar) => {
 };
 
 export const replaceEditablePart = (mask, replaceChar) => {
-  return mask.replace(/0/g, replaceChar);
+  const withReplacedChar = mask.replace(/0/g, replaceChar);
+  if (withReplacedChar) return withReplacedChar;
+  return "";
 };
 
 export const inputChangeIndicator = (maskedValue, Input, replaceChar) => {
