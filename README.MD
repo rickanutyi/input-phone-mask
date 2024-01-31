@@ -32,4 +32,4 @@ Implement a simple mask for input effortlessly using the `InputPhoneMask` functi
 
 ## Example
 
-If `mask` is set to "00-00" and `replaceChar` is set to "_", the input will display "__-__".
+If `mask` is set to "00-00" and `replaceChar` is set to "_", the input will display "\_\_-\_\_".
