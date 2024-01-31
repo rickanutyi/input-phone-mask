@@ -1,16 +1,28 @@
 # Input Simple Mask
 
-Implement a simple mask for phone input effortlessly using the `InputPhoneMask` function. This function accepts various parameters to tailor the input behavior according to your needs.
+Implement a simple mask for input effortlessly using the `InputPhoneMask` function. This function accepts various parameters to tailor the input behavior according to your needs.
 
 ## Usage
+# Js
 ```
-window.InputPhoneMask({
-    input: "input",                   // ID of the input element
-    mask: "0000 0000 0000 0000",      // Mask for formatting the input
-    onChange: (value) => console.log(value), // Callback function triggered on input change
-    replaceChar: "-",                 // The character shown instead of "0" in the mask
-});
-
+    window.InputPhoneMask({
+        input: "input",                   // ID of the input element
+        mask: "0000 0000 0000 0000",      // Mask for formatting the input
+        onChange: (value) => console.log(value), // Callback function triggered on input change
+        replaceChar: "-",                 // The character shown instead of "0" in the mask
+    });
+```
+# React
+```
+    import { SimpleInputMask } from "input-simple-mask";
+    
+    <SimpleInputMask
+        mask={"0000 0000 0000 0000"}
+        replaceChar={"_"}
+        onChange={console.log}
+        render={(props) => <input {...props} />} // Input should accept the 'ref' parameter 
+    />
+```
 ## Parameters
 
 - **input**: ID of the input element to apply the mask to.
