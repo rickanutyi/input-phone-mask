@@ -1,13 +1,23 @@
-#Input simple mask
+# Input Simple Mask
 
+Implement a simple mask for phone input effortlessly using the `InputPhoneMask` function. This function accepts various parameters to tailor the input behavior according to your needs.
+
+## Usage
+```
 window.InputPhoneMask({
-    input: "input",
-    mask: "0000 0000 0000 0000",
-    onChange: (value) => console.log(value),
-    replaceChar: "-",
+    input: "input",                   // ID of the input element
+    mask: "0000 0000 0000 0000",      // Mask for formatting the input
+    onChange: (value) => console.log(value), // Callback function triggered on input change
+    replaceChar: "-",                 // The character shown instead of "0" in the mask
 });
-input = id of input
-mask = any string value, char "0" will be editable part, any other char will be part of mask
-onChange = Function(value: string / MaskedValue)
-replaceChar = The value that will shown instead of "0"
-example mask = 00-00, replaceChar = "_", input shows "__-__"
+
+## Parameters
+
+- **input**: ID of the input element to apply the mask to.
+- **mask**: A string defining the mask for formatting the input. Use "0" for editable parts and any other character for fixed parts of the mask.
+- **onChange**: A callback function that receives the current value or masked value on input change.
+- **replaceChar**: The character to be displayed instead of "0" in the mask.
+
+## Example
+
+If `mask` is set to "00-00" and `replaceChar` is set to "_", the input will display "__-__".

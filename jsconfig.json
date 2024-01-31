@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "module": "ES2020",
-    // "paths": {
-    //   "core/*": ["core/*"],
-    //   "utils/*": ["utils/*"]
-    // }
+    "module": "ES2020"
   }
 }
