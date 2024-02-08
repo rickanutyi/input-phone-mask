@@ -9,7 +9,13 @@ type RenderPropsType = {
  * <SimpleInputMask
     mask="0000-0000"
     replaceChar="_"
-    render={(props) => <input {...props} />}
+    onChange={(maskedValue) => {
+      // your code ...
+    }}
+    render={(props) => (
+      // Input should accept the 'ref' parameter 
+      <input {...props} /> // Do not pass the input value
+    )} 
 * />
 */
 export declare function SimpleInputMask(props: {

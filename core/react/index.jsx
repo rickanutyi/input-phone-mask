@@ -1,9 +1,9 @@
+import React, { useEffect, useRef } from "react";
 import {
   inputChangeIndicator,
   maskNewValue,
   replaceEditablePart,
 } from "../index";
-import { useEffect, useRef } from "react";
 
 /**
    * @example
@@ -20,13 +20,13 @@ export const SimpleInputMask = ({ render, mask, replaceChar, onChange }) => {
 
   const onInput = ({ target: { value }, nativeEvent }) => {
     if (nativeEvent && nativeEvent.inputType === "deleteContentBackward") {
-      onChange(value);
+      onChange && onChange(value);
       return;
     }
     const maskWithReplaceChar = replaceEditablePart(mask, replaceChar);
     const newValue = maskNewValue(maskWithReplaceChar, value, replaceChar);
     ref.current.value = newValue;
-    onChange(newValue);
+    onChange && onChange(newValue);
     inputChangeIndicator(newValue, ref.current, replaceChar);
   };
 

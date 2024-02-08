@@ -7,7 +7,7 @@ Implement a simple mask for input effortlessly using the `InputPhoneMask` functi
 ```
     window.InputPhoneMask({
         input: "input",                   // ID of the input element
-        mask: "0000 0000 0000 0000",      // Mask for formatting the input
+        mask: "0000 0000 0000 0000",      // Mask for formatting the input. Do not use numbers instead 0
         onChange: (value) => console.log(value), // Callback function triggered on input change
         replaceChar: "-",                 // The character shown instead of "0" in the mask
     });
@@ -17,16 +17,22 @@ Implement a simple mask for input effortlessly using the `InputPhoneMask` functi
     import { SimpleInputMask } from "input-simple-mask";
     
     <SimpleInputMask
-        mask={"0000 0000 0000 0000"}
+        mask={"0000 0000 0000 0000"} // Do not use numbers instead 0
         replaceChar={"_"}
-        onChange={console.log}
-        render={(props) => <input {...props} />} // Input should accept the 'ref' parameter 
+        onChange={(maskedValue) => {
+            // your code ...
+        }}
+        render={(props) => (
+            // Input should accept the 'ref' parameter 
+            <input {...props} /> // Do not pass the input value
+        )} 
     />
+    
 ```
 ## Parameters
 
 - **input**: ID of the input element to apply the mask to.
-- **mask**: A string defining the mask for formatting the input. Use "0" for editable parts and any other character for fixed parts of the mask.
+- **mask**: A string defining the mask for formatting the input. Use "0" for editable parts and any other character for fixed parts of the mask. Do not use numbers instead 0
 - **onChange**: A callback function that receives the current value or masked value on input change.
 - **replaceChar**: The character to be displayed instead of "0" in the mask.
 

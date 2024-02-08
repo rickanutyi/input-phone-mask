@@ -25,30 +25,6 @@ export const maskNewValue = (mask, newValue, replaceChar) => {
   return maskedValue;
 };
 
-/**
- *
- * @param {string} value - значение инпута
- * @param {string} mask - Маска, только где изменяемы значения были заменены на replaceChar
- * @returns {string}
- * @deprecated
- */
-const maskOnDelete = (value, mask, replaceChar) => {
-  const maskArray = mask.split("");
-  const unmaskedValue = value.replace(/\D/g, "").replace(/^(996)/, "");
-  let index = 0;
-  const newValue = maskArray.reduce((acc, prev) => {
-    if (prev === replaceChar) {
-      index = index + 1;
-      //тут мы смотрим если что то стерлось unmaskedValue[index - 1] будет undefined, в таком случае акрнем acc + replaceChar
-      return unmaskedValue[index - 1]
-        ? acc + unmaskedValue[index - 1]
-        : acc + replaceChar;
-    }
-    return acc + prev;
-  }, "");
-  return `${newValue}`;
-};
-
 export const replaceEditablePart = (mask, replaceChar) => {
   const withReplacedChar = mask.replace(/0/g, replaceChar);
   if (withReplacedChar) return withReplacedChar;
@@ -97,7 +73,7 @@ export const InputPhoneMask = ({ input, onChange, mask, replaceChar }) => {
       inputValue,
       replaceChar
     );
-    onChange(maskedValue);
+    onChange && onChange(maskedValue);
     Input.value = maskedValue;
     inputChangeIndicator(maskedValue, Input);
   });

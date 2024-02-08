@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "description": "chipi chipi chapa chapa",
   "main": "index.js",
-  "keywords": ["input-simple-mask", "input-mask"],
+  "keywords": [
+    "input-simple-mask",
+    "input-mask"
+  ],
   "scripts": {
-    "test": "test",
+    "test": "jest",
     "build": "webpack"
   },
   "author": "Erlan, Ilim",
@@ -13,10 +16,13 @@
   "devDependencies": {
     "@babel/core": "^7.23.7",
     "@babel/preset-env": "^7.23.8",
+    "@babel/preset-react": "^7.23.3",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "react": "^18.2.0",
     "webpack": "^5.90.0",
     "webpack-cli": "^5.1.4"
-  },
-  "dependencies": {
-    "react": "^18.2.0"
   }
 }
