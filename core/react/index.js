@@ -9,25 +9,25 @@ import {
    * @example
    * <SimpleInputMask
         mask="0000-0000"
-        replaceChar="_"
+        placeholderChar="_"
         render={(props) => <input {...props} />}
    * />
    */
 
-export const SimpleInputMask = ({ render, mask, replaceChar, onChange }) => {
+export const SimpleInputMask = ({ render, mask, placeholderChar, onChange }) => {
   const ref = useRef(null);
-  const inputState = useRef({ value: replaceEditablePart(mask, replaceChar) });
+  const inputState = useRef({ value: replaceEditablePart(mask, placeholderChar) });
 
   const onInput = ({ target: { value }, nativeEvent }) => {
     if (nativeEvent && nativeEvent.inputType === "deleteContentBackward") {
       onChange && onChange(value);
       return;
     }
-    const maskWithReplaceChar = replaceEditablePart(mask, replaceChar);
-    const newValue = maskNewValue(maskWithReplaceChar, value, replaceChar);
+    const maskWithPlaceholderChar = replaceEditablePart(mask, placeholderChar);
+    const newValue = maskNewValue(maskWithPlaceholderChar, value, placeholderChar);
     ref.current.value = newValue;
     onChange && onChange(newValue);
-    inputChangeIndicator(newValue, ref.current, replaceChar);
+    inputChangeIndicator(newValue, ref.current, placeholderChar);
   };
 
   useEffect(() => {
