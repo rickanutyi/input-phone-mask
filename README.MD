@@ -4,20 +4,22 @@ Implement a simple mask for input effortlessly using the `InputPhoneMask` functi
 
 ## Usage
 # Js
-```
+
+```js
     window.InputPhoneMask({
         input: "input",                   // ID of the input element
-        mask: "0000 0000 0000 0000",      // Mask for formatting the input. Do not use numbers instead 0
+        mask: "0000 0000 0000 0000",      // Mask for formatting the input. Do not use numbers exept 0
         onChange: (value) => console.log(value), // Callback function triggered on input change
-        replaceChar: "-",                 // The character shown instead of "0" in the mask
+        replaceChar: "-",                 // The character shown exept of "0" in the mask
     });
 ```
-# React
-```
+## React
+
+```jsx
     import { SimpleInputMask } from "input-simple-mask";
-    
+
     <SimpleInputMask
-        mask={"0000 0000 0000 0000"} // Do not use numbers instead 0
+        mask={"0000 0000 0000 0000"} // Do not use numbers exept 0
         replaceChar={"_"}
         onChange={(maskedValue) => {
             // your code ...
@@ -26,8 +28,7 @@ Implement a simple mask for input effortlessly using the `InputPhoneMask` functi
             // Input should accept the 'ref' parameter 
             <input {...props} /> // Do not pass the input value
         )} 
-    />
-    
+    />   
 ```
 ## Parameters
 
