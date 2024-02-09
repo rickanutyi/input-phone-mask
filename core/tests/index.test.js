@@ -7,12 +7,12 @@ test("default input value as mask", async () => {
   render(
     <SimpleInputMask
       mask="0000-0000"
-      replaceChar="_"
+      placeholderChar="_"
       onChange={(maskedValue) => {
         // some code
       }}
       render={(props) => (
-        <input role="testId" className="testid" {...props} /> // Do not pass the input value
+        <input role="testId" className="testid" {...props} />
       )}
     />
   );
@@ -23,12 +23,12 @@ test("onChange value", async () => {
   render(
     <SimpleInputMask
       mask="0000-0000"
-      replaceChar="_"
+      placeholderChar="_"
       onChange={(maskedValue) => {
         //some code
       }}
       render={(props) => (
-        <input role="testId" className="testid" {...props} /> // Do not pass the input value
+        <input role="testId" className="testid" {...props} />
       )}
     />
   );
@@ -44,12 +44,12 @@ test("display input value on change", async () => {
   render(
     <SimpleInputMask
       mask="0000-0000"
-      replaceChar="_"
+      placeholderChar="_"
       onChange={(maskedValue) => {
         value = maskedValue;
       }}
       render={(props) => (
-        <input role="testId" className="testid" {...props} /> // Do not pass the input value
+        <input role="testId" className="testid" {...props} />
       )}
     />
   );
