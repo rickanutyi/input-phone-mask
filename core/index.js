@@ -7,15 +7,15 @@ import { isNumber } from "../utils";
  * @param {string} replaceCahr
  * @returns {string}
  * @example
- * MutableReplaceChar = "_"
+ * MutablePlaceholderChar = "_"
  * maskNewValue('+996-000-000-000', '12') => '+996-12_-___-___'
  */
-export const maskNewValue = (mask, newValue, replaceChar) => {
+export const maskNewValue = (mask, newValue, placeholderChar) => {
   const unmaskedValue = newValue.replace(/\D/g, "").replace(/^(996)/, "");
   let index = 0;
   const arrayFromMask = mask.split("");
   const maskedValueArray = arrayFromMask.map((char, i) => {
-    if (char === replaceChar && isNumber(unmaskedValue[index])) {
+    if (char === placeholderChar && isNumber(unmaskedValue[index])) {
       const value = unmaskedValue[index];
       index = index + 1;
       return value;
@@ -25,16 +25,16 @@ export const maskNewValue = (mask, newValue, replaceChar) => {
   return maskedValue;
 };
 
-export const replaceEditablePart = (mask, replaceChar) => {
-  const withReplacedChar = mask.replace(/0/g, replaceChar);
+export const replaceEditablePart = (mask, placeholderChar) => {
+  const withReplacedChar = mask.replace(/0/g, placeholderChar);
   if (withReplacedChar) return withReplacedChar;
   return "";
 };
 
-export const inputChangeIndicator = (maskedValue, Input, replaceChar) => {
+export const inputChangeIndicator = (maskedValue, Input, placeholderChar) => {
   let stop = false;
   const numbersCount = maskedValue.split("").reduce((acc, prev) => {
-    if (prev === replaceChar) stop = true;
+    if (prev === placeholderChar) stop = true;
     if (stop) return acc;
     return acc + 1;
   }, 0);
@@ -48,20 +48,20 @@ export const inputChangeIndicator = (maskedValue, Input, replaceChar) => {
  *  input: string;
  *  onChange: (value: string) => void;
  *  mask: string
- *  replaceChar: string
+ *  placeholderChar: string
  * }} props
  * @example
  * window.InputPhoneMask({
     input: "input",
     mask: "0000 0000 0000 0000",
     onChange: (value) => console.log(value),
-    replaceChar: "-",
+    placeholderChar: "-",
   });
  */
-export const InputPhoneMask = ({ input, onChange, mask, replaceChar }) => {
+export const InputPhoneMask = ({ input, onChange, mask, placeholderChar }) => {
   const Input = document.getElementById(input);
-  const maskWithReplaceChar = replaceEditablePart(mask, replaceChar);
-  Input.value = maskWithReplaceChar;
+  const maskWithPlaceholderChar = replaceEditablePart(mask, placeholderChar);
+  Input.value = maskWithPlaceholderChar;
   Input.addEventListener("input", function (event) {
     const inputValue = event.currentTarget.value;
     //при нажатии на кнопку удаления
@@ -69,9 +69,9 @@ export const InputPhoneMask = ({ input, onChange, mask, replaceChar }) => {
       return;
     }
     const maskedValue = maskNewValue(
-      maskWithReplaceChar,
+      maskWithPlaceholderChar,
       inputValue,
-      replaceChar
+      placeholderChar
     );
     onChange && onChange(maskedValue);
     Input.value = maskedValue;
