@@ -8,7 +8,7 @@ type RenderPropsType = {
  * @example
  * <SimpleInputMask
     mask="0000-0000"
-    replaceChar="_"
+    placeholderChar="_"
     onChange={(maskedValue) => {
       // your code ...
     }}
@@ -20,7 +20,7 @@ type RenderPropsType = {
 */
 export declare function SimpleInputMask(props: {
   mask: string;
-  replaceChar: string;
+  placeholderChar: string;
   onChange?: (value: string) => void;
   render: (inputProps: RenderPropsType) => React.ReactNode;
 });

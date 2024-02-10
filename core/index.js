@@ -1,4 +1,4 @@
-import { isNumber } from "../utils";
+import { isNumber, isMutable } from "../utils";
 
 /**
  *
@@ -11,10 +11,14 @@ import { isNumber } from "../utils";
  * maskNewValue('+996-000-000-000', '12') => '+996-12_-___-___'
  */
 export const maskNewValue = (mask, newValue, placeholderChar) => {
-  const unmaskedValue = newValue.replace(/\D/g, "").replace(/^(996)/, "");
+  const unmaskedValue = newValue.replace(/\D/g, "");
   let index = 0;
   const arrayFromMask = mask.split("");
   const maskedValueArray = arrayFromMask.map((char, i) => {
+    if (isNumber(char)) {
+      index = index + 1;
+      return char;
+    }
     if (char === placeholderChar && isNumber(unmaskedValue[index])) {
       const value = unmaskedValue[index];
       index = index + 1;

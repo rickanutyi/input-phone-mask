@@ -1,23 +1,23 @@
 export declare function maskNewValue(
   mask: string,
   newValue: string,
-  replaceChar: string
+  placeholderChar: string
 ): string;
 
 export declare function replaceEditablePart(
   mask: string,
-  replaceChar: string
+  placeholderChar: string
 ): string;
 
 export declare function inputChangeIndicator(
   maskedValue: string,
   Input: HTMLInputElement,
-  replaceChar: stirng
+  placeholderChar: stirng
 ): void;
 
 export declare function InputPhoneMask(props: {
   input: string;
   onChange: (value: string) => void;
   mask: string;
-  replaceChar: string;
+  placeholderChar: string;
 });
